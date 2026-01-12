@@ -132,7 +132,7 @@
 
         // --- TRANSLATION DICTIONARY ---
         const UI_TEXT = {
-            subtitle: { en: "AI Empowered Reflection", hi: "आपके चक्रों का प्रतिबिंब" },
+            subtitle: { en: "A Reflection of Your Chakra", hi: "आपके चक्रों का प्रतिबिंब" },
             beginBtn: { en: "Begin Analysis", hi: "विश्लेषण प्रारंभ करें" },
             question: { en: "Question", hi: "प्रश्न" },
             disagree: { en: "Strongly Disagree", hi: "पूर्णतः असहमत" },
@@ -173,7 +173,17 @@
             alignment: { en: "Alignment Complete", hi: "संरेखण पूर्ण" },
             outOf: { en: "Out of 100", hi: "100 में से" },
             breakdown: { en: "Full Breakdown", hi: "पूर्ण विवरण" },
-            restart: { en: "Restart Journey", hi: "यात्रा पुनः आरंभ करें" }
+            restart: { en: "Restart Journey", hi: "यात्रा पुनः आरंभ करें" },
+            
+            // NEW MESSAGE
+            multipleBlockages: {
+                en: "You have multiple Blockages but we will start from these two first",
+                hi: "आपके कई चक्रों में समान अवरोध हैं, हम पहले इन 2 से शुरुआत करेंगे"
+            },
+            
+            // CONGRATS MESSAGE (For 0 Blockage)
+            congratsTitle: { en: "Congratulations!", hi: "बधाई हो!" },
+            congratsMsg: { en: "You have no energy blockages. Your chakras are in perfect harmony.", hi: "आपके कोई ऊर्जा अवरोध नहीं हैं। आपके चक्र पूर्ण सामंजस्य में हैं।" }
         };
 
         // --- QUESTION STATEMENTS (NEW) ---
@@ -215,8 +225,8 @@
                 id: "root", name: { en: "Root Chakra", hi: "Root Chakra" }, sanskrit: "Muladhara", 
                 colorClass: "bg-rose-100 text-rose-700", barColor: "bg-rose-500", logo: ChakraLogos.root, 
                 descPoints: { 
-                    en: ["Stability & Safety", "Family patterns", "Physical health"],
-                    hi: ["स्थिरता और सुरक्षा", "पारिवारिक पैटर्न", "शारीरिक स्वास्थ्य"]
+                    en: ["Feeling of fear", "High anxiety", "High insecurity"],
+                    hi: ["डर की भावना", "अत्यधिक चिंता", "अत्यधिक असुरक्षा"]
                 },
                 healing: { 
                     crystal: { en: "Red Jasper · Hematite", hi: "लाल जैस्पर · हेमेटाइट" }, 
@@ -234,8 +244,8 @@
                 id: "sacral", name: { en: "Sacral Chakra", hi: "Sacral Chakra" }, sanskrit: "Svadhisthana", 
                 colorClass: "bg-orange-100 text-orange-700", barColor: "bg-orange-500", logo: ChakraLogos.sacral, 
                 descPoints: { 
-                    en: ["Creativity & Pleasure", "Emotional fluidity", "Intimacy"],
-                    hi: ["रचनात्मकता और आनंद", "भावनात्मक प्रवाह", "आत्मीयता"]
+                    en: ["Emotional instability", "Feel of loss of pleasure", "Highly sensitive"],
+                    hi: ["भावनात्मक अस्थिरता", "आनंद की कमी महसूस होना", "अत्यधिक संवेदनशील"]
                 },
                 healing: { 
                     crystal: { en: "Carnelian · Moonstone", hi: "कार्नेलियन · मूनस्टोन" }, 
@@ -253,8 +263,8 @@
                 id: "solar", name: { en: "Solar Plexus", hi: "Solar Plexus" }, sanskrit: "Manipura", 
                 colorClass: "bg-amber-100 text-amber-700", barColor: "bg-amber-500", logo: ChakraLogos.solar, 
                 descPoints: { 
-                    en: ["Self-confidence", "Personal power", "Decision-making"],
-                    hi: ["आत्मविश्वास", "व्यक्तिगत शक्ति", "निर्णय लेना"]
+                    en: ["Over thinking", "Low self confidence", "Uncontrolled anger & irritation"],
+                    hi: ["अत्यधिक सोचना", "कम आत्मविश्वास", "अनियंत्रित क्रोध और चिड़चिड़ापन"]
                 },
                 healing: { 
                     crystal: { en: "Citrine · Tiger's Eye", hi: "सिट्रीन · टाइगर आई" }, 
@@ -272,8 +282,8 @@
                 id: "heart", name: { en: "Heart Chakra", hi: "Heart Chakra" }, sanskrit: "Anahata", 
                 colorClass: "bg-emerald-100 text-emerald-700", barColor: "bg-emerald-500", logo: ChakraLogos.heart, 
                 descPoints: { 
-                    en: ["Love & Compassion", "Forgiveness", "Trust in others"],
-                    hi: ["प्रेम और करुणा", "क्षमा", "दूसरों पर भरोसा"]
+                    en: ["Feeling of loneliness", "Inability to connect", "Trust issues"],
+                    hi: ["अकेलेपन का अहसास", "जुड़ने में असमर्थता", "विश्वास की समस्याएं"]
                 },
                 healing: { 
                     crystal: { en: "Rose Quartz · Green Jade", hi: "रोज क्वार्ट्ज · हरा जेड" }, 
@@ -284,15 +294,15 @@
                 questions: [
                     { id: "h1", text: { en: "I feel emotionally alone, even when I am around people.", hi: "लोगों के बीच होने पर भी मैं अंदर से अकेला महसूस करता हूँ।" } },
                     { id: "h2", text: { en: "I carry unspoken emotional pain that I rarely share.", hi: "मैं अपने अंदर के दर्द को किसी से भी बाँट नहीं पाता हूँ।" } },
-                    { id: "h3", text: { en: "I find it difficult to be gentle with myself.", hi: "मैं अपने जीवन में संतुष्ट महसूस नहीं करता हूँ।" } }
+                    { id: "h3", text: { en: "I Pretend to be fine even though i feel Lost", hi: "मैं अपने जीवन में संतुष्ट महसूस नहीं करता हूँ।" } }
                 ] 
             },
             { 
                 id: "throat", name: { en: "Throat Chakra", hi: "Throat Chakra" }, sanskrit: "Vishuddha", 
                 colorClass: "bg-cyan-100 text-cyan-700", barColor: "bg-cyan-500", logo: ChakraLogos.throat, 
                 descPoints: { 
-                    en: ["Communication", "Self-trust", "Speaking truth"],
-                    hi: ["संचार", "आत्म-विश्वास", "सत्य बोलना"]
+                    en: ["Fear of speaking", "Difficulty expressing feelings", "Fear of judgement"],
+                    hi: ["बोलने का डर", "भावनाओं को व्यक्त करने में कठिनाई", "निर्णय का डर"]
                 },
                 healing: { 
                     crystal: { en: "Blue Lace Agate · Aquamarine", hi: "ब्लू लेस एगेट · एक्वामरीन" }, 
@@ -310,8 +320,8 @@
                 id: "third_eye", name: { en: "Third Eye", hi: "Third Eye" }, sanskrit: "Ajna", 
                 colorClass: "bg-indigo-100 text-indigo-700", barColor: "bg-indigo-500", logo: ChakraLogos.third_eye, 
                 descPoints: { 
-                    en: ["Intuition & Insight", "Mental clarity", "Vision"],
-                    hi: ["अंतर्ज्ञान और अंतर्दृष्टि", "मानसिक स्पष्टता", "दृष्टि"]
+                    en: ["Lack of focus", "Difficulty with perspective", "Poor intuition"],
+                    hi: ["एकाग्रता की कमी", "नजरिए में कठिनाई", "कमजोर अंतर्ज्ञान"]
                 },
                 healing: { 
                     crystal: { en: "Amethyst · Lapis Lazuli", hi: "एमेथिस्ट · लापीस लाजुली" }, 
@@ -329,8 +339,8 @@
                 id: "crown", name: { en: "Crown Chakra", hi: "Crown Chakra" }, sanskrit: "Sahasrara", 
                 colorClass: "bg-purple-100 text-purple-700", barColor: "bg-purple-500", logo: ChakraLogos.crown, 
                 descPoints: { 
-                    en: ["Spiritual Connection", "Inner peace", "Life purpose"],
-                    hi: ["आध्यात्मिक संबंध", "आंतरिक शांति", "जीवन का उद्देश्य"]
+                    en: ["Detachment", "Mental fog", "Spiritual disconnection"],
+                    hi: ["वैराग्य / अलगाव", "मानसिक धुंध", "आध्यात्मिक अलगाव"]
                 },
                 healing: { 
                     crystal: { en: "Clear Quartz · Selenite", hi: "क्लियर क्वार्ट्ज · सेलेनाइट" }, 
@@ -373,6 +383,7 @@
             const [scores, setScores] = useState({});
             const [finalResults, setFinalResults] = useState(null);
             const [lowestChakras, setLowestChakras] = useState([]);
+            const [hasManyBlockages, setHasManyBlockages] = useState(false); // NEW STATE
             const [animKey, setAnimKey] = useState(0);
             const [isTransitioning, setIsTransitioning] = useState(false); 
             const [guideChoice, setGuideChoice] = useState(null); // 'yes' or 'no'
@@ -443,6 +454,15 @@
                 
                 setFinalResults(finalData);
                 setLowestChakras(bottomTwo);
+
+                // NEW LOGIC: Check for multiple blockages
+                // Check if the 3rd lowest score is equal to the 2nd lowest score (Tie)
+                // OR if the 3rd lowest score is <= 50 (meaning blockage >= 50%)
+                const isComplex = chakraScoresArray.length > 2 && (
+                    chakraScoresArray[2].score === chakraScoresArray[1].score || 
+                    chakraScoresArray[2].score <= 50
+                );
+                setHasManyBlockages(isComplex);
                 
                 // --- AUTO CAPTURE RESULT (CREATE NEW ROW) ---
                 // This creates the initial row with type "AUTO_RESULT"
@@ -660,6 +680,7 @@
 
                 // INVERT SCORES FOR BLOCKAGE DISPLAY (100 - Harmony = Blockage)
                 const blockageScore = 100 - finalResults.GrandTotal;
+                const isPerfect = blockageScore === 0;
 
                 return (
                     // OPTIMIZED: Reduced padding (p-4 instead of p-6) to use full width
@@ -734,56 +755,86 @@
                                     </div>
                                 </div>
 
-                                {/* BOTTOM ROW: 50% Primary - 50% Secondary */}
-                                <div className="grid grid-cols-2 divide-x divide-stone-200/50">
-                                    {/* BOTTOM LEFT: PRIMARY BLOCK */}
-                                    <div className="p-3 flex flex-col justify-start relative overflow-hidden text-left">
-                                         {/* OPTIMIZED: Slightly larger title font */}
-                                         <div className={`text-[10px] uppercase tracking-widest text-[#9fbcd3] font-bold mb-2 ${lang === 'hi' ? 'hindi-font' : ''}`}>
-                                             {t(UI_TEXT.primaryBlock)}
-                                         </div>
-                                         
-                                         <div className="flex items-center gap-2 mb-2">
-                                             <div className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center ${primary.colorClass}`}>
-                                                 {primary.logo("w-4 h-4")}
-                                             </div>
-                                             <div>
-                                                 {/* OPTIMIZED: Slightly larger name font */}
-                                                 <div className={`text-sm font-bold text-[#3e3a36] leading-tight ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(primary.name)}</div>
-                                                 <div className="text-[10px] text-[#7c746e] italic">{primary.sanskrit}</div>
-                                             </div>
-                                         </div>
-
-                                        {/* OPTIMIZED: Slightly larger list font */}
-                                        <ul className={`text-[11px] text-[#5d5854] space-y-1 w-full leading-tight ${lang === 'hi' ? 'hindi-font' : ''}`}>
-                                            {t(primary.descPoints).map((pt, i) => <li key={i}>• {pt}</li>)}
-                                        </ul>
-                                    </div>
-
-                                    {/* BOTTOM RIGHT: SECONDARY BLOCK */}
-                                    <div className="p-3 flex flex-col justify-start relative overflow-hidden text-left">
-                                        {/* OPTIMIZED: Slightly larger title font */}
-                                        <div className={`text-[10px] uppercase tracking-widest text-[#d1b676] font-bold mb-2 ${lang === 'hi' ? 'hindi-font' : ''}`}>
-                                            {t(UI_TEXT.secondaryBlock)}
+                                {isPerfect ? (
+                                    // CONGRATS VIEW (When 0 Blockage)
+                                    <div className="p-8 flex flex-col items-center justify-center text-center bg-emerald-50/30">
+                                        <div className="mb-3 text-amber-400">
+                                            <Icons.Sparkles />
                                         </div>
-
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <div className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center ${secondary.colorClass}`}>
-                                                {secondary.logo("w-4 h-4")}
+                                        <h3 className={`text-lg font-serif font-bold text-[#3e3a36] mb-2 ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                            {t(UI_TEXT.congratsTitle)}
+                                        </h3>
+                                        <p className={`text-xs text-[#7c746e] max-w-[200px] leading-relaxed ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                            {t(UI_TEXT.congratsMsg)}
+                                        </p>
+                                        <div className="mt-4 flex gap-2 text-xl">
+                                             <span>✨</span><span>🧘</span><span>✨</span>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    // BLOCKAGE DETAILS VIEW (When Blockage > 0)
+                                    <div className="contents">
+                                        {/* NEW: Guidance Message for Multiple Blockages */}
+                                        {hasManyBlockages && (
+                                            <div className="p-3 bg-amber-50 text-center border-b border-stone-200/50">
+                                                <p className={`text-xs text-amber-700 font-medium leading-tight ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>
+                                                    {t(UI_TEXT.multipleBlockages)}
+                                                </p>
                                             </div>
-                                            <div>
-                                                {/* OPTIMIZED: Slightly larger name font */}
-                                                <div className={`text-sm font-bold text-[#3e3a36] leading-tight ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(secondary.name)}</div>
-                                                <div className="text-[10px] text-[#7c746e] italic">{secondary.sanskrit}</div>
+                                        )}
+
+                                        {/* BOTTOM ROW: 50% Primary - 50% Secondary */}
+                                        <div className="grid grid-cols-2 divide-x divide-stone-200/50">
+                                            {/* BOTTOM LEFT: PRIMARY BLOCK */}
+                                            <div className="p-3 flex flex-col justify-start relative overflow-hidden text-left">
+                                                 {/* OPTIMIZED: Slightly larger title font */}
+                                                 <div className={`text-[10px] uppercase tracking-widest text-[#9fbcd3] font-bold mb-2 ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                                     {t(UI_TEXT.primaryBlock)}
+                                                 </div>
+                                                 
+                                                 <div className="flex items-center gap-2 mb-2">
+                                                     <div className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center ${primary.colorClass}`}>
+                                                         {primary.logo("w-4 h-4")}
+                                                     </div>
+                                                     <div>
+                                                         {/* OPTIMIZED: Slightly larger name font */}
+                                                         <div className={`text-sm font-bold text-[#3e3a36] leading-tight ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(primary.name)}</div>
+                                                         <div className="text-[10px] text-[#7c746e] italic">{primary.sanskrit}</div>
+                                                     </div>
+                                                 </div>
+
+                                                {/* OPTIMIZED: Slightly larger list font */}
+                                                <ul className={`text-[11px] text-[#5d5854] space-y-1 w-full leading-tight ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                                    {t(primary.descPoints).map((pt, i) => <li key={i}>• {pt}</li>)}
+                                                </ul>
+                                            </div>
+
+                                            {/* BOTTOM RIGHT: SECONDARY BLOCK */}
+                                            <div className="p-3 flex flex-col justify-start relative overflow-hidden text-left">
+                                                {/* OPTIMIZED: Slightly larger title font */}
+                                                <div className={`text-[10px] uppercase tracking-widest text-[#d1b676] font-bold mb-2 ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                                    {t(UI_TEXT.secondaryBlock)}
+                                                </div>
+
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <div className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center ${secondary.colorClass}`}>
+                                                        {secondary.logo("w-4 h-4")}
+                                                    </div>
+                                                    <div>
+                                                        {/* OPTIMIZED: Slightly larger name font */}
+                                                        <div className={`text-sm font-bold text-[#3e3a36] leading-tight ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(secondary.name)}</div>
+                                                        <div className="text-[10px] text-[#7c746e] italic">{secondary.sanskrit}</div>
+                                                    </div>
+                                                </div>
+
+                                                {/* OPTIMIZED: Slightly larger list font */}
+                                                <ul className={`text-[11px] text-[#5d5854] space-y-1 w-full leading-tight ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                                    {t(secondary.descPoints).map((pt, i) => <li key={i}>• {pt}</li>)}
+                                                </ul>
                                             </div>
                                         </div>
-
-                                        {/* OPTIMIZED: Slightly larger list font */}
-                                        <ul className={`text-[11px] text-[#5d5854] space-y-1 w-full leading-tight ${lang === 'hi' ? 'hindi-font' : ''}`}>
-                                            {t(secondary.descPoints).map((pt, i) => <li key={i}>• {pt}</li>)}
-                                        </ul>
                                     </div>
-                                </div>
+                                )}
                             </div>
 
                             {/* --- NEW GUIDE SELECTION SECTION --- */}
