@@ -132,7 +132,7 @@
 
         // --- TRANSLATION DICTIONARY ---
         const UI_TEXT = {
-            subtitle: { en: "AI Empowered Reflection", hi: "आपके चक्रों का प्रतिबिंब" },
+            subtitle: { en: "A Reflection of Your Chakra", hi: "आपके चक्रों का प्रतिबिंब" },
             beginBtn: { en: "Begin Analysis", hi: "विश्लेषण प्रारंभ करें" },
             question: { en: "Question", hi: "प्रश्न" },
             disagree: { en: "Strongly Disagree", hi: "पूर्णतः असहमत" },
@@ -539,7 +539,10 @@
                                 </p>
                             </div>
                             
-                            <button onClick={() => setView('lang_select')} className="action-btn w-full py-4 rounded-xl font-medium text-sm shadow-md flex items-center justify-center gap-2">
+                            <button 
+                                // TEMPORARY CHANGE: Direct English. To revert, use: onClick={() => setView('lang_select')}
+                                onClick={() => setLanguageAndBegin('en')} 
+                                className="action-btn w-full py-4 rounded-xl font-medium text-sm shadow-md flex items-center justify-center gap-2">
                                 Begin Analysis <Icons.ArrowRight />
                             </button>
                         </div>
@@ -814,6 +817,23 @@
             // 3.5 AI GUIDE INTRO (New Screen)
             if (view === 'ai_guide_intro') {
                 
+                // Define variables at the TOP of the scope to prevent ReferenceErrors
+                const isYes = guideChoice === 'yes'; 
+                
+                const benefits = [
+                    "AI As Your Private Healer",
+                    "Bespoke Rituals, Not Generic",
+                    "Wisdom Of 5000 Years Of Vedic Knowledge",
+                    "Proof Of Progress You Can See",
+                    "Your Personal Coach Always Available On 24 X 7"
+                ];
+
+                const containerClass = isYes 
+                    ? "bg-emerald-50 border-emerald-100" // Removed /50 for safety
+                    : "bg-rose-50 border-rose-100";
+                
+                const iconColor = isYes ? "text-emerald-600" : "text-rose-600 opacity-60";
+
                 // --- THANK YOU STATE ---
                 if (regSubmitted) {
                     return (
@@ -839,7 +859,7 @@
                     return (
                         <div className="h-full flex flex-col items-center justify-center p-6 animate-enter">
                             <div className="soft-card p-8 rounded-[2rem] w-full max-w-sm relative">
-                                {/* If user clicked "Yes", closing form takes them back to benefits? Or if from "Join" btn */}
+                                {/* If user clicked "Yes", closing form takes them back to benefits (No flow) */}
                                 <button onClick={() => setShowRegForm(false)} className="absolute top-6 right-6 text-[#7c746e] hover:text-[#3e3a36]">✕</button>
                                 
                                 <div className="text-center mb-6">
@@ -906,26 +926,7 @@
                     )
                 }
 
-                // --- STANDARD SELECTION VIEW (Only shown for "No" logic now, or if form closed) ---
-                const isYes = guideChoice === 'yes'; 
-                // Since we auto-show form for 'yes', this part is mostly for 'no' case 
-                // BUT if they close the form (X), they might land here with isYes=true. 
-                // So we keep the benefits logic intact for that edge case.
-                
-                const benefits = [
-                    "AI As Your Private Healer",
-                    "Bespoke Rituals, Not Generic",
-                    "Wisdom Of 5000 Years Of Vedic Knowledge",
-                    "Proof Of Progress You Can See",
-                    "Your Personal Coach Always Available On 24 X 7"
-                ];
-
-                const containerClass = isYes 
-                    ? "bg-emerald-50/50 border-emerald-100" 
-                    : "bg-rose-50/50 border-rose-100";
-                
-                const iconColor = isYes ? "text-emerald-600" : "text-rose-600 opacity-60";
-                
+                // --- STANDARD SELECTION VIEW ---
                 return (
                     <div className="h-full flex flex-col items-center justify-center p-8 animate-enter relative">
                         <div className={`soft-card p-8 rounded-[2rem] w-full max-w-sm flex flex-col items-center relative overflow-hidden ${containerClass}`}>
